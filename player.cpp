@@ -37,24 +37,29 @@ void Player::setTexture(sf::Texture *tex)
 
 void Player::event(sf::Event *ev)
 {
-	if ((ev->type = sf::Event::KeyPressed) && 
+	if ((ev->type == sf::Event::KeyPressed) && 
 		(ev->key.code == sf::Keyboard::Left ))
 	{
 		player_move = LEFT;
 		
 	}
-	if ((ev->type = sf::Event::KeyPressed) &&
+	if ((ev->type == sf::Event::KeyPressed) &&
 		(ev->key.code == sf::Keyboard::Right))
 	{
 		player_move = RIGHT;
 	}
 
-	if ((ev->type = sf::Event::KeyPressed) &&
-		(ev->key.code == sf::Keyboard::Space)
-		&& (player_state==STAY))
+	if ((ev->type == sf::Event::KeyPressed) &&
+		(ev->key.code == sf::Keyboard::Space))
 	{
-		player_state = JUMP;
+		jump();
 		jump_time = clock.getElapsedTime().asSeconds();
+	}
+
+	if (((ev->type == sf::Event::KeyReleased) && (ev->key.code == sf::Keyboard::Right)) 
+		|| (ev->type == sf::Event::KeyReleased) && (ev->key.code == sf::Keyboard::Left))
+	{
+		player_move = NO; 
 	}
 
 }
@@ -62,7 +67,7 @@ void Player::event(sf::Event *ev)
 void Player::update(float time)
 {
 	move();
-	printf("y:%f \n", sprite.getPosition().y);
+	//printf("y:%f \n", sprite.getPosition().y);
 	if (player_move == LEFT)
 	{
 		speedx = -SPEEDX * time;
