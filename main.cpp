@@ -14,7 +14,7 @@ void main()
 			game.event(&event, &window);
 		}
 		game.update();
-
+		//for wrong commit
 		game.draw(&window);
 	}
 }
