@@ -1,12 +1,15 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "player.h"
+#include "TextureManager.h"
 
 enum Game_State {PAUSE, MENU, GAME};
 
 class Game
 {
 private:
+	TextureManager tex_manager;
+
 	sf::CircleShape circle;
 	Player player;
 	//Levels

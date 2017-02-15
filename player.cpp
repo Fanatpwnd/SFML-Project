@@ -62,7 +62,7 @@ void Player::event(sf::Event *ev)
 void Player::update(float time)
 {
 	move();
-	printf("y:%f \n", sprite.getPosition().y);
+	//printf("y:%f \n", sprite.getPosition().y);
 	if (player_move == LEFT)
 	{
 		speedx = -SPEEDX * time;
