@@ -1,8 +1,6 @@
 #include <SFML\Graphics.hpp>
 #include "game.h"
 
-//Проверка кириллицы
-
 void main()
 {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Platformer");
@@ -16,6 +14,7 @@ void main()
 			game.event(&event, &window);
 		}
 		game.update();
+		//for wrong commit
 		game.draw(&window);
 	}
 }
