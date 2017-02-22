@@ -6,10 +6,13 @@ Game::Game()
 	circle.setFillColor(sf::Color::Red);
 	circle.setPosition(100, 100);
 	state = MENU;
-	texture.loadFromFile("logo.png");
-	player.setTexture(&texture);
-	tBackground.loadFromFile("background.jpg");
-	sBackground.setTexture(tBackground);
+
+	tex_manager.loadTexture("player.png", "player");
+	tex_manager.loadTexture("background.jpg", "background");
+
+	player.setTexture(tex_manager.getTexture("player"));
+
+	sBackground.setTexture(*tex_manager.getTexture("background"));
 }
 
 void Game::update()

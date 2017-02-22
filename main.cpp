@@ -14,7 +14,6 @@ void main()
 			game.event(&event, &window);
 		}
 		game.update();
-
 		game.draw(&window);
 	}
 }
