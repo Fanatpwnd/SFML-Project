@@ -14,7 +14,7 @@ Animation::Animation(sf::Texture &t, float x, float y, float width, float height
 	}
 }
 
-void Animation::playingAnimation(float time){
+void Animation::tick(float time){
 	if (!isPlaying){ return; }
 
 	currentFrame += speed * time;

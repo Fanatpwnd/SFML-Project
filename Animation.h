@@ -20,7 +20,7 @@ public:
 
         Animation(sf::Texture &t, float x, float y, float width, float height, float speed, int framesCount, int step);
 
-        void playingAnimation(float time);//This method is playing the animation
+        void tick(float time);//This method is playing the animation
 
         sf::Sprite getSprite();
         std::vector<sf::IntRect> &getFrames();
