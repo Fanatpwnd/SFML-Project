@@ -26,7 +26,6 @@ void Animation::tick(float time){
 }
 
 float Animation::getCurrentFrame(){ return currentFrame; }
-float Animation::getCurrentFrame(){ return currentFrame; }
 float Animation::getSpeed(){ return speed; }
 std::vector<sf::IntRect> &Animation::getFrames(){ return frames; }
 std::vector<sf::IntRect> &Animation::getInvertedFrames() { return frames_inverted; }
