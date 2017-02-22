@@ -1,44 +1,64 @@
-#include "game.h"
+#include "Game.h"
+#include <Windows.h>
 
 Game::Game()
 {
-	circle.setRadius(20);
-	circle.setFillColor(sf::Color::Red);
-	circle.setPosition(100, 100);
-	state = MENU;
+	printf("Create game...\n");
+	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+	view.setCenter(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
+	window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
 
+	loadPlayer();
+}
+
+void Game::loadPlayer()
+{
 	tex_manager.loadTexture("player.png", "player");
-	tex_manager.loadTexture("background.jpg", "background");
-
 	player.setTexture(tex_manager.getTexture("player"));
-
-	sBackground.setTexture(*tex_manager.getTexture("background"));
+	player.setPosition(100.0f, 100.0f);
 }
 
 void Game::update()
 {
-	time = clock.restart().asSeconds();
 	player.update(time);
-	//logic
 }
 
-void Game::event(sf::Event *ev, sf::RenderWindow *win)
+void Game::event()
 {
-	player.event(ev);
-	//event
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+	sf::Event event;
+	while (window.pollEvent(event))
 	{
-		win->close();
-	}
-		
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+		{
+			window.close();
+		}
+
+		player.event(&event);
+	}	
 }
 
-void Game::draw(sf::RenderWindow *window)
+void Game::draw()
 {
-	window->clear();
-	//draw
-	window->draw(sBackground);
-	player.draw(window);
-	window->draw(circle);
-	window->display();
+	window.clear();
+	player.draw(&window);
+	window.display();
+}
+
+void Game::timeTick()
+{
+	time = clock.getElapsedTime().asSeconds();
+    clock.restart();
+}
+
+
+void Game::loop()
+{
+	printf("Start game... \n");
+	while(window.isOpen())
+	{
+		timeTick();
+		event();
+		update();
+		draw();
+	}
 }

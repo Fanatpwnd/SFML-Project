@@ -1,29 +1,33 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "player.h"
+#include "Player.h"
 #include "TextureManager.h"
 
-enum Game_State {PAUSE, MENU, GAME};
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 600
+#define WINDOW_TITLE "SFML-Project"
 
 class Game
 {
 private:
 	TextureManager tex_manager;
+	sf::View view;
 
-	sf::CircleShape circle;
+    sf::Clock clock;
+    float time;
+
 	Player player;
-	//Levels
-	//State Game
-	Game_State state;
-	sf::Clock clock;
-	float time;
-	sf::Texture texture;
-	sf::Texture tBackground;
-	sf::Sprite sBackground;
-public:
-	Game();
+private:
 	void update();
-	void draw(sf::RenderWindow *window);
-	void event(sf::Event *ev, sf::RenderWindow *win);
+	void draw();
+	void event();	
+	void loadPlayer();
+public:
+	
+    sf::RenderWindow window;
 
+	Game();
+	
+	void timeTick();
+	void loop();
 };
