@@ -2,7 +2,7 @@
 #define SPEEDX 300
 #define JUMPNUMBER 2
 #define SPEEDJUMP 600
-#define SPEEDFALL 400
+#define SPEEDFALL 400.0f
 #define TIMEJUMP 0.2
 
 Player::Player()
@@ -10,8 +10,8 @@ Player::Player()
 	jumpCount = 0;
 	pState = FALL;
 	pMove = NO;
-	sprite.setPosition(200, 0);
-	sprite.setScale(5.0f, 5.0f);
+	speedx = 0;
+	speedy = 0;
 }
 
 /*State Player::getState()
@@ -84,6 +84,7 @@ void Player::jump()
 void Player::update(float time)
 {
 	move();
+	//printf("time = %f speedy = %f speed fall = %f\n", time, speedy, SPEEDFALL);
 	switch (pMove)
 	{
 
@@ -124,7 +125,7 @@ void Player::update(float time)
 	case FALL:
 	{
 		speedy = SPEEDFALL * time;
-		if (sprite.getPosition().y >= 1000)
+		if (sprite.getPosition().y >= 500.0f)
 		{
 			pState = STAY;
 			jumpCount = 0;
@@ -159,7 +160,7 @@ const sf::Vector2f Player::getPosition()
 
 const sf::Texture* Player::getTexture()
 {
-	sprite.getTexture();
+	return sprite.getTexture();
 }
 
 const sf::Rect<float> Player::getRect()
