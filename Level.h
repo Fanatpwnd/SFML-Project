@@ -7,8 +7,10 @@ class Level
 protected:
 	sf::Sprite background;
 public:
-	virtual void loadTextures(TextureManager* tex_manager);
-	virtual void draw(sf::RenderWindow* window);
-	virtual void update(float time);
-	virtual void event(sf::Event* ev);
+	Level();
+	virtual void loadTextures(TextureManager* tex_manager) = 0;
+	virtual void draw(sf::RenderWindow* window) = 0;
+	virtual void update(float time) = 0;
+	virtual void event(sf::Event* ev) = 0;
+	virtual ~Level() = 0;
 };

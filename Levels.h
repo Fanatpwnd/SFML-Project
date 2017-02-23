@@ -6,10 +6,10 @@ class Level1: public Level
 	sf::Texture test;
 public:
 	Level1();
-	void loadTextures(TextureManager* tex_manager) override;
-	void draw(sf::RenderWindow* window) override;
-	void update(float time) override;
-	void event(sf::Event* ev) override;
+	void loadTextures(TextureManager* tex_manager);
+	void draw(sf::RenderWindow* window);
+	void update(float time);
+	void event(sf::Event* ev);
 };
 
 class Level2: public Level
@@ -17,10 +17,10 @@ class Level2: public Level
 	Player player;
 public:
 	Level2();
-	void loadTextures(TextureManager* tex_manager) override;
-	void draw(sf::RenderWindow* window) override;
-	void update(float time) override;
-	void event(sf::Event* ev) override;
+	void loadTextures(TextureManager* tex_manager);
+	void draw(sf::RenderWindow* window);
+	void update(float time);
+	void event(sf::Event* ev);
 };
 
 class Menu: public Level
@@ -28,8 +28,8 @@ class Menu: public Level
 	sf::Sprite button1, button2;
 public:
 	Menu();
-	void loadTextures(TextureManager* tex_manager) override;
-	void draw(sf::RenderWindow* window) override;
-	void update(float time) override;
-	void event(sf::Event* ev) override;
+	void loadTextures(TextureManager* tex_manager);
+	void draw(sf::RenderWindow* window);
+	void update(float time);
+	void event(sf::Event* ev);
 };
