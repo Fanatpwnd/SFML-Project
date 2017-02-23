@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Player.h"
-#include "TextureManager.h"
+#include "Levels.h"
+#include <vector>
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
@@ -10,24 +10,23 @@
 class Game
 {
 private:
-	TextureManager tex_manager;
-	sf::View view;
-
-    sf::Clock clock;
-    float time;
-
-	Player player;
+	TextureManager			m_textureManager;
+	sf::View				m_view;
+    sf::Clock				m_clock;
+    float					m_time;
+	sf::RenderWindow		m_window;
+	
+	std::vector<Level>		m_levels;
+	int						m_currentLevel;
 private:
 	void update();
 	void draw();
-	void event();	
-	void loadPlayer();
+	void event();
+	void loadTexturesFromFiles();
+	void loadLevels();
+	void loadTextureInLevels();
 public:
-	
-    sf::RenderWindow window;
-
 	Game();
-	
 	void timeTick();
 	void loop();
 };
