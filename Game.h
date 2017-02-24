@@ -16,7 +16,7 @@ private:
     float					m_time;
 	sf::RenderWindow		m_window;
 	
-	std::vector<Level>		m_levels;
+	std::vector<Level*>		m_levels;
 	int						m_currentLevel;
 private:
 	void update();
