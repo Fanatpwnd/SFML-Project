@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include "Animation.h"
 
+Animation::Animation() {}
+
 Animation::Animation(sf::Texture &t, float x, float y, float width, float height, float speed, int framesCount, int step){
 	this->speed = speed;
 	sprite.setTexture(t);
@@ -25,6 +27,7 @@ void Animation::tick(float time){
 	else{ sprite.setTextureRect(frames[(int)currentFrame]); }
 }
 
+sf::Sprite Animation::getSprite() {return sprite;}
 float Animation::getCurrentFrame(){ return currentFrame; }
 float Animation::getSpeed(){ return speed; }
 std::vector<sf::IntRect> &Animation::getFrames(){ return frames; }

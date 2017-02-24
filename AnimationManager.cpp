@@ -12,9 +12,9 @@ void AnimationManager::createAnimation(std::string name, sf::Texture texture, fl
 
 void AnimationManager::setAnimation(std::string name){ currentAnimation = name; }
 
-void AnimationManager::draw(sf::RenderWindow &window, int x = 0, int y = 0){
+void AnimationManager::draw(sf::RenderWindow *window, int x, int y){
 	animations[currentAnimation].getSprite().setPosition(x, y);
-	window.draw(animations[currentAnimation].getSprite);
+	window->draw(animations[currentAnimation].getSprite());
 }
 
 void AnimationManager::invertAnimation(bool flag){ animations[currentAnimation].isInverted = flag; }

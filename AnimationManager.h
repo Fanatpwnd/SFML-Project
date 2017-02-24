@@ -14,7 +14,8 @@ public:
 	void playAnimation();
 	void pauseAnimation();
 	void tick(float time);
-	void draw(sf::RenderWindow &window, int x = 0,int y = 0);
+	void draw(sf::RenderWindow *window, int x = 0,int y = 0);
+
 
 	std::map<std::string, Animation> &getAnimations();
 };

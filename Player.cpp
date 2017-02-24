@@ -61,7 +61,7 @@ void Player::event(sf::Event *ev)
 	}
 }
 
-void Player::draw(sf::RenderWindow *window)
+void Player::draw(sf::RenderWindow* window)
 {
 	window->draw(sprite);
 }
@@ -84,61 +84,50 @@ void Player::jump()
 void Player::update(float time)
 {
 	move();
-	//printf("time = %f speedy = %f speed fall = %f\n", time, speedy, SPEEDFALL);
 	switch (pMove)
 	{
+		case LEFT:{
+			speedx = -SPEEDX * time;
+			break;
+		}
 
-	case LEFT:
-	{
-		speedx = -SPEEDX * time;
-		break;
-	}
+		case RIGHT:{
+			speedx = SPEEDX * time;
+			break;
+		}
 
-	case RIGHT:
-	{
-		speedx = SPEEDX * time;
-		break;
-	}
-
-	case NO:
-	{
-		speedx = 0;
-		break;
-	}
-
+		case NO:{
+			speedx = 0;
+			break;
+		}
 	}
 
 	switch (pState)
 	{
-
-	case JUMP:
-	{
-		speedy = -SPEEDJUMP * time;
-		if (clock.getElapsedTime().asSeconds() - jumpTime
-			>= TIMEJUMP)
-		{
-			pState = FALL;
+		case JUMP:{
+			speedy = -SPEEDJUMP * time;
+			if (clock.getElapsedTime().asSeconds() - jumpTime
+				>= TIMEJUMP)
+			{
+				pState = FALL;
+			}
+			break;
 		}
-		break;
-	}
 
-	case FALL:
-	{
-		speedy = SPEEDFALL * time;
-		if (sprite.getPosition().y >= 500.0f)
-		{
-			pState = STAY;
-			jumpCount = 0;
+		case FALL:{
+			speedy = SPEEDFALL * time;
+			if (sprite.getPosition().y >= 500.0f)
+			{
+				pState = STAY;
+				jumpCount = 0;
+			}
+			break;
 		}
-		break;
-	}
 
-	case STAY:
-	{
-		speedy = 0;
-		break;
-	}
-
+		case STAY:{
+			speedy = 0;
+			break;
+		}
 	}
 
 }

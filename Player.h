@@ -1,23 +1,23 @@
 #include <SFML\Graphics.hpp>
+#include "AnimationManager.h"
 enum State { FALL, JUMP, STAY };
 enum Move{ LEFT, RIGHT, NO };
 
 class Player
 {
 private:
-	float speedx, speedy;
-	float jumpTime;
-	int jumpCount;
-	sf::Sprite sprite;
-	sf::Clock clock;
-	State pState;
-	Move pMove;
+	float				speedx, speedy;
+	float				jumpTime;
+	int					jumpCount;
+	sf::Sprite			sprite;
+	AnimationManager	animations;
+	sf::Clock			clock;
+	State				pState;
+	Move				pMove;
 
 private:
 	void move();
 	void jump();
-	//State getState();
-	//Move getMoveState();
 	bool keyPressed(sf::Keyboard::Key key, sf::Event *ev);
 	bool keyRealesed(sf::Keyboard::Key key, sf::Event *ev);
 
