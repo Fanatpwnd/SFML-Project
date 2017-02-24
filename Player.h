@@ -8,9 +8,9 @@ class Player
 private:
 	float				speedx, speedy;
 	float				jumpTime;
-	int					jumpCount;
+	int				jumpCount;
 	sf::Sprite			sprite;
-	AnimationManager	animations;
+	AnimationManager		animations;
 	sf::Clock			clock;
 	State				pState;
 	Move				pMove;
