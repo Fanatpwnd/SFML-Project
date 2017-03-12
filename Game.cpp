@@ -13,7 +13,7 @@ Game::Game()
 
 void Game::loadPlayer()
 {
-	tex_manager.loadTexture("player.png", "player");
+	tex_manager.loadTexture("res/player.png", "player");
 	player.setTexture(tex_manager.getTexture("player"));
 	player.setPosition(100.0f, 100.0f);
 }

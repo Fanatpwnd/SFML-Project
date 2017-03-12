@@ -1,34 +1,18 @@
 #include <SFML/Graphics.hpp>
 #include "Animation.h"
 
-Animation::Animation() {}
-
-Animation::Animation(sf::Texture &t, float x, float y, float width, float height, float speed, int framesCount, int step){
-	this->speed = speed;
-	sprite.setTexture(t);
-	currentFrame = 0;
-	isPlaying = true;
-	isInverted = false;
-
-	for (int i = 0; i < framesCount; i++){
-		frames.push_back(sf::IntRect(x + i*step, y, width, height));
-		frames_inverted.push_back(sf::IntRect(x + i*step, y, -width, height));
-	}
+Animation :: Animation(){
+	m_currentFrame = -1;
 }
 
-void Animation::tick(float time){
-	if (!isPlaying){ return; }
+sf::IntRect Animation::getCurrentFrame(float time, float speed){ 
+	m_currentFrame += time*speed;
 
-	currentFrame += speed * time;
-	if (currentFrame > frames.size()){ currentFrame -= frames.size(); }
+	if (m_currentFrame > m_frames.size() - 1){ m_currentFrame = 0; }
 
-
-	if (isInverted) { sprite.setTextureRect(frames[(int)currentFrame]); }
-	else{ sprite.setTextureRect(frames[(int)currentFrame]); }
+	return m_frames[m_currentFrame];
 }
 
-sf::Sprite Animation::getSprite() {return sprite;}
-float Animation::getCurrentFrame(){ return currentFrame; }
-float Animation::getSpeed(){ return speed; }
-std::vector<sf::IntRect> &Animation::getFrames(){ return frames; }
-std::vector<sf::IntRect> &Animation::getInvertedFrames() { return frames_inverted; }
+void Animation::addFrame(int x, int y, int width, int height){
+	m_frames.push_back(sf::IntRect(x, y, width, height));
+}

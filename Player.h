@@ -1,16 +1,20 @@
 #include <SFML\Graphics.hpp>
-#include "AnimationManager.h"
+#include "Animation.h"
+#include <vector>
+
 enum State { FALL, JUMP, STAY };
 enum Move{ LEFT, RIGHT, NO };
 
 class Player
 {
 private:
+	
+	Animation rightMove, leftMove;
+
 	float				speedx, speedy;
 	float				jumpTime;
-	int				jumpCount;
+	int					jumpCount;
 	sf::Sprite			sprite;
-	AnimationManager		animations;
 	sf::Clock			clock;
 	State				pState;
 	Move				pMove;
@@ -31,5 +35,8 @@ public:
 	void setPosition(float x, float y);
 	const sf::Vector2f getPosition();
 	const sf::Texture* getTexture();
-	const sf::FloatRect getRect();	
+	const sf::FloatRect getRect();
+
+	//Временные методы для классов анимации
+	void initFrames();
 };

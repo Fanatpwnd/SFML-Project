@@ -6,28 +6,16 @@
 I think there is one type of animation. For example jump, run, shoot, etc.
 */
 class Animation{
-
-        sf::Sprite sprite;
-        std::vector<sf::IntRect> frames;
-        std::vector<sf::IntRect> frames_inverted;
-        float currentFrame;
-        float speed;
-
+	
+	std::vector<sf::IntRect>	m_frames;
+	float						m_currentFrame;
 
 public:
-        bool isInverted; // this variable show: display inverted frame or not
-        bool isPlaying;
 
-		Animation();
-        Animation(sf::Texture &t, float x, float y, float width, float height, float speed, int framesCount, int step);
+	Animation();
 
-        void tick(float time);//This method is playing the animation
-
-        sf::Sprite getSprite();
-        std::vector<sf::IntRect> &getFrames();
-        std::vector<sf::IntRect> &getInvertedFrames();
-        float getCurrentFrame();
-        float getSpeed();
+	sf::IntRect getCurrentFrame(float time, float speed);
+	void addFrame(int x, int y, int width, int height);
 };
 #endif // ANIMATION_H
 

@@ -1,5 +1,5 @@
 #include "Player.h"
-#define SPEEDX 300
+#define SPEEDX 200
 #define JUMPNUMBER 2
 #define SPEEDJUMP 600
 #define SPEEDFALL 400.0f
@@ -7,23 +7,14 @@
 
 Player::Player()
 {
+	initFrames();
+
 	jumpCount = 0;
 	pState = FALL;
 	pMove = NO;
 	speedx = 0;
 	speedy = 0;
 }
-
-/*State Player::getState()
-{
-	if ( (pState == STAY) || (jumpCount < JUMPNUMBER) )
-		return JUMP;
-
-}
-
-Move Player::getMoveState()
-ent
-}*/
 
 bool Player::keyPressed(sf::Keyboard::Key key, sf::Event *ev)
 {
@@ -46,9 +37,11 @@ void Player::event(sf::Event *ev)
 
 	if (keyPressed(sf::Keyboard::Right, ev))
 	{
+
+
 		pMove = RIGHT;
 	}
-
+	
 	if (keyRealesed(sf::Keyboard::Left, ev) ||
 		keyRealesed(sf::Keyboard::Right, ev))
 	{
@@ -88,11 +81,17 @@ void Player::update(float time)
 	{
 		case LEFT:{
 			speedx = -SPEEDX * time;
+
+			sprite.setTextureRect(leftMove.getCurrentFrame(time, 4));
+
 			break;
 		}
 
 		case RIGHT:{
 			speedx = SPEEDX * time;
+			
+			sprite.setTextureRect(rightMove.getCurrentFrame(time, 4));
+
 			break;
 		}
 
@@ -155,4 +154,11 @@ const sf::Texture* Player::getTexture()
 const sf::Rect<float> Player::getRect()
 {
 	return sprite.getGlobalBounds();
+}
+
+void Player::initFrames(){
+	for (int i = 0; i < 4; ++i){ rightMove.addFrame(i * 96, 192, 96, 96); }
+	for (int i = 1; i < 5; ++i){ leftMove.addFrame(i * 96, 192, -96, 96); }
+
+
 }
