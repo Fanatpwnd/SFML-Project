@@ -8,11 +8,11 @@
 
 Player::Player()
 {
+	speedx = speedy = 0.0f;
 	jumpCount = 0;
 	pState = FALL;
 	pMove = NO;
-	sprite.setPosition(200, 0);
-	sprite.setScale(5.0f, 5.0f);
+	sprite.setScale(0.2f, 0.2f);
 }
 
 
@@ -75,8 +75,6 @@ void Player::jump()
 
 void Player::update(float time)
 {
-	printf("%d \n", pState);
-	setPosition(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
 	move();
 	switch (pMove)
 	{
@@ -118,11 +116,14 @@ void Player::update(float time)
 	case FALL:
 	{
 		speedy = SPEEDFALL * time;
-		/*if (sprite.getPosition().y >= Entity::x)
+		///////////Temp floor////////////////
+		if (sprite.getPosition().y > 500)
 		{
 			pState = STAY;
+			setPosition(getPosition().x, 500);
 			jumpCount = 0;
-		}*/
+		}
+		//////////////////////////////////////
 		break;
 	}
 
@@ -153,7 +154,7 @@ const sf::Vector2f Player::getPosition()
 
 const sf::Texture* Player::getTexture()
 {
-	sprite.getTexture();
+	return sprite.getTexture();
 }
 
 const sf::Rect<float> Player::getRect()
@@ -198,9 +199,6 @@ void Player::collision(Entity* entity)
 			pMove = NO;
 			sprite.setPosition(sf::Vector2f(en.left+en.width, pl.top));
 		}
-		//if(entity->)
-
-		else pState = FALL;
 	
 
 }

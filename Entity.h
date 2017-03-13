@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 
+
 class Entity
 {
 	//float x, y;
@@ -12,7 +13,7 @@ public:
 class Wall : public Entity {
 public:
 	Wall();
-
+	Wall(float x, float y, sf::Texture* texture);
 	void draw(sf::RenderWindow *window);
 	void setTexture(sf::Texture *texture);
 	void setPosition(float x, float y);

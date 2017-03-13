@@ -6,6 +6,13 @@ Wall::Wall()
 	m_sprite.setScale(0.5f, 0.5f);
 }
 
+Wall::Wall(float x, float y, sf::Texture* texture)
+{
+	m_sprite.setPosition(x, y);
+	setTexture(texture);
+	m_sprite.setScale(0.5f, 0.5f);
+}
+
 void Wall::draw(sf::RenderWindow *window)
 {
 	window->draw(m_sprite);
@@ -28,7 +35,7 @@ const sf::Vector2f Wall::getPosition()
 
 const sf::Texture* Wall::getTexture()
 {
-	m_sprite.getTexture();
+	return m_sprite.getTexture();
 }
 
 const sf::FloatRect Wall::getRect()

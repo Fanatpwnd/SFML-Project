@@ -1,7 +1,9 @@
 #include <SFML\Graphics.hpp>
 #include "Entity.h"
+
 enum State { FALL, JUMP, STAY };
 enum Move{ LEFT, RIGHT, NO };
+
 
 class Player
 {
