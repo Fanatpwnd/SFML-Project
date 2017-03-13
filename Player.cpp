@@ -7,13 +7,18 @@
 
 Player::Player()
 {
-	initFrames();
+	m_animationManager = new AnimationManager(&sprite);
+	initAnimation();
 
 	jumpCount = 0;
 	pState = FALL;
 	pMove = NO;
 	speedx = 0;
 	speedy = 0;
+}
+
+Player::~Player(){
+	delete m_animationManager;
 }
 
 bool Player::keyPressed(sf::Keyboard::Key key, sf::Event *ev)
@@ -82,7 +87,7 @@ void Player::update(float time)
 		case LEFT:{
 			speedx = -SPEEDX * time;
 
-			sprite.setTextureRect(leftMove.getCurrentFrame(time, 4));
+			m_animationManager->playAnimation("leftMove", time);
 
 			break;
 		}
@@ -90,7 +95,7 @@ void Player::update(float time)
 		case RIGHT:{
 			speedx = SPEEDX * time;
 			
-			sprite.setTextureRect(rightMove.getCurrentFrame(time, 4));
+			m_animationManager->playAnimation("rightMove", time);
 
 			break;
 		}
@@ -104,6 +109,7 @@ void Player::update(float time)
 	switch (pState)
 	{
 		case JUMP:{
+			m_animationManager->playAnimation("jump", time);
 			speedy = -SPEEDJUMP * time;
 			if (clock.getElapsedTime().asSeconds() - jumpTime
 				>= TIMEJUMP)
@@ -114,6 +120,7 @@ void Player::update(float time)
 		}
 
 		case FALL:{
+			m_animationManager->playAnimation("fall", time);
 			speedy = SPEEDFALL * time;
 			if (sprite.getPosition().y >= 500.0f)
 			{
@@ -156,9 +163,14 @@ const sf::Rect<float> Player::getRect()
 	return sprite.getGlobalBounds();
 }
 
-void Player::initFrames(){
-	for (int i = 0; i < 4; ++i){ rightMove.addFrame(i * 96, 192, 96, 96); }
-	for (int i = 1; i < 5; ++i){ leftMove.addFrame(i * 96, 192, -96, 96); }
+void Player::initAnimation(){
+	m_animationManager->addAnimation("rightMove");
+	m_animationManager->addAnimation("leftMove");
+	m_animationManager->addAnimation("jump");
+	m_animationManager->addAnimation("fall");
 
-
+	m_animationManager->initFrames("rightMove", 56, 560, 56, 80, 3);
+	m_animationManager->initFrames("leftMove", 56, 560, 56, 80, 3, true);
+	m_animationManager->addFrame("jump", 56, 160, 56, 80);
+	m_animationManager->addFrame("fall", 112, 160, 56, 80);
 }

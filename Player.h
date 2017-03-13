@@ -1,5 +1,5 @@
 #include <SFML\Graphics.hpp>
-#include "Animation.h"
+#include "AnimationManager.h"
 #include <vector>
 
 enum State { FALL, JUMP, STAY };
@@ -9,7 +9,7 @@ class Player
 {
 private:
 	
-	Animation rightMove, leftMove;
+	AnimationManager*	m_animationManager;
 
 	float				speedx, speedy;
 	float				jumpTime;
@@ -25,9 +25,12 @@ private:
 	bool keyPressed(sf::Keyboard::Key key, sf::Event *ev);
 	bool keyRealesed(sf::Keyboard::Key key, sf::Event *ev);
 
+	void initAnimation();
 
 public:
 	Player();
+	~Player();
+
 	void draw(sf::RenderWindow *window);
 	void update(float time);
 	void setTexture(sf::Texture *texture);
@@ -37,6 +40,5 @@ public:
 	const sf::Texture* getTexture();
 	const sf::FloatRect getRect();
 
-	//Временные методы для классов анимации
-	void initFrames();
+
 };
