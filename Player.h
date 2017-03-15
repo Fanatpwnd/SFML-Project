@@ -1,10 +1,8 @@
 #pragma once
 #include <SFML\Graphics.hpp>
-<<<<<<< HEAD
 #include "AnimationManager.h"
 #include <vector>
-=======
->>>>>>> refs/remotes/origin/master
+
 
 enum State { FALL, JUMP, STAY };
 enum Move{ LEFT, RIGHT, NO };

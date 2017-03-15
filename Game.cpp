@@ -1,26 +1,7 @@
 #include "Game.h"
 #include <Windows.h>
 
-<<<<<<< HEAD
-Game::Game()
-{
-	printf("Create game...\n");
-	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-	view.setCenter(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
-	window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
 
-	loadPlayer();
-}
-
-void Game::loadPlayer()
-{
-	tex_manager.loadTexture("res/player.png", "player");
-	player.setTexture(tex_manager.getTexture("player"));
-	player.setPosition(100.0f, 100.0f);
-}
-
-=======
->>>>>>> refs/remotes/origin/master
 void Game::update()
 {
 	m_levels[m_currentLevel]->update(m_time);
