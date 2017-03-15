@@ -1,5 +1,10 @@
 #pragma once
 #include <SFML\Graphics.hpp>
+<<<<<<< HEAD
+#include "AnimationManager.h"
+#include <vector>
+=======
+>>>>>>> refs/remotes/origin/master
 
 enum State { FALL, JUMP, STAY };
 enum Move{ LEFT, RIGHT, NO };
@@ -7,25 +12,29 @@ enum Move{ LEFT, RIGHT, NO };
 class Player
 {
 private:
-	float speedx, speedy;
-	float jumpTime;
-	int jumpCount;
-	sf::Sprite sprite;
-	sf::Clock clock;
-	State pState;
-	Move pMove;
+	
+	AnimationManager*	m_animationManager;
+
+	float				speedx, speedy;
+	float				jumpTime;
+	int					jumpCount;
+	sf::Sprite			sprite;
+	sf::Clock			clock;
+	State				pState;
+	Move				pMove;
 
 private:
 	void move();
 	void jump();
-	//State getState();
-	//Move getMoveState();
 	bool keyPressed(sf::Keyboard::Key key, sf::Event *ev);
 	bool keyRealesed(sf::Keyboard::Key key, sf::Event *ev);
 
+	void initAnimation();
 
 public:
 	Player();
+	~Player();
+
 	void draw(sf::RenderWindow *window);
 	void update(float time);
 	void setTexture(sf::Texture *texture);
@@ -33,5 +42,7 @@ public:
 	void setPosition(float x, float y);
 	const sf::Vector2f getPosition();
 	const sf::Texture* getTexture();
-	const sf::FloatRect getRect();	
+	const sf::FloatRect getRect();
+
+
 };

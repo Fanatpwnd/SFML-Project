@@ -1,5 +1,5 @@
 #include "Player.h"
-#define SPEEDX 300
+#define SPEEDX 200
 #define JUMPNUMBER 2
 #define SPEEDJUMP 600
 #define SPEEDFALL 400.0f
@@ -7,6 +7,9 @@
 
 Player::Player()
 {
+	m_animationManager = new AnimationManager(&sprite);
+	initAnimation();
+
 	jumpCount = 0;
 	pState = FALL;
 	pMove = NO;
@@ -15,16 +18,9 @@ Player::Player()
 	sprite.setScale(1.5f, 1.5f);
 }
 
-/*State Player::getState()
-{
-	if ( (pState == STAY) || (jumpCount < JUMPNUMBER) )
-		return JUMP;
-
+Player::~Player(){
+	delete m_animationManager;
 }
-
-Move Player::getMoveState()
-ent
-}*/
 
 bool Player::keyPressed(sf::Keyboard::Key key, sf::Event *ev)
 {
@@ -47,9 +43,11 @@ void Player::event(sf::Event *ev)
 
 	if (keyPressed(sf::Keyboard::Right, ev))
 	{
+
+
 		pMove = RIGHT;
 	}
-
+	
 	if (keyRealesed(sf::Keyboard::Left, ev) ||
 		keyRealesed(sf::Keyboard::Right, ev))
 	{
@@ -62,7 +60,7 @@ void Player::event(sf::Event *ev)
 	}
 }
 
-void Player::draw(sf::RenderWindow *window)
+void Player::draw(sf::RenderWindow* window)
 {
 	window->draw(sprite);
 }
@@ -85,61 +83,58 @@ void Player::jump()
 void Player::update(float time)
 {
 	move();
-	//printf("time = %f speedy = %f speed fall = %f\n", time, speedy, SPEEDFALL);
 	switch (pMove)
 	{
+		case LEFT:{
+			speedx = -SPEEDX * time;
 
-	case LEFT:
-	{
-		speedx = -SPEEDX * time;
-		break;
-	}
+			m_animationManager->playAnimation("leftMove", time);
 
-	case RIGHT:
-	{
-		speedx = SPEEDX * time;
-		break;
-	}
+			break;
+		}
 
-	case NO:
-	{
-		speedx = 0;
-		break;
-	}
+		case RIGHT:{
+			speedx = SPEEDX * time;
+			
+			m_animationManager->playAnimation("rightMove", time);
 
+			break;
+		}
+
+		case NO:{
+			speedx = 0;
+			break;
+		}
 	}
 
 	switch (pState)
 	{
-
-	case JUMP:
-	{
-		speedy = -SPEEDJUMP * time;
-		if (clock.getElapsedTime().asSeconds() - jumpTime
-			>= TIMEJUMP)
-		{
-			pState = FALL;
+		case JUMP:{
+			m_animationManager->playAnimation("jump", time);
+			speedy = -SPEEDJUMP * time;
+			if (clock.getElapsedTime().asSeconds() - jumpTime
+				>= TIMEJUMP)
+			{
+				pState = FALL;
+			}
+			break;
 		}
-		break;
-	}
 
-	case FALL:
-	{
-		speedy = SPEEDFALL * time;
-		if (sprite.getPosition().y >= 500.0f)
-		{
-			pState = STAY;
-			jumpCount = 0;
+		case FALL:{
+			m_animationManager->playAnimation("fall", time);
+			speedy = SPEEDFALL * time;
+			if (sprite.getPosition().y >= 500.0f)
+			{
+				pState = STAY;
+				jumpCount = 0;
+			}
+			break;
 		}
-		break;
-	}
 
-	case STAY:
-	{
-		speedy = 0;
-		break;
-	}
-
+		case STAY:{
+			speedy = 0;
+			break;
+		}
 	}
 
 }
@@ -167,4 +162,16 @@ const sf::Texture* Player::getTexture()
 const sf::Rect<float> Player::getRect()
 {
 	return sprite.getGlobalBounds();
+}
+
+void Player::initAnimation(){
+	m_animationManager->addAnimation("rightMove");
+	m_animationManager->addAnimation("leftMove");
+	m_animationManager->addAnimation("jump");
+	m_animationManager->addAnimation("fall");
+
+	m_animationManager->initFrames("rightMove", 56, 560, 56, 80, 3);
+	m_animationManager->initFrames("leftMove", 56, 560, 56, 80, 3, true);
+	m_animationManager->addFrame("jump", 56, 160, 56, 80);
+	m_animationManager->addFrame("fall", 112, 160, 56, 80);
 }
