@@ -1,5 +1,5 @@
 #include "Game.h"
-//Level branch
+//master branch
 void main()
 {
 	Game game;
