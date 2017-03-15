@@ -12,6 +12,7 @@ Player::Player()
 	pMove = NO;
 	speedx = 0;
 	speedy = 0;
+	sprite.setScale(1.5f, 1.5f);
 }
 
 /*State Player::getState()

@@ -1,4 +1,6 @@
+#pragma once
 #include <SFML\Graphics.hpp>
+
 enum State { FALL, JUMP, STAY };
 enum Move{ LEFT, RIGHT, NO };
 
