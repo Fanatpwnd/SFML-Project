@@ -56,7 +56,7 @@ Game::Game()
 
 void Game::loadTexturesFromFiles()
 {
-	m_textureManager.loadTexture("player.png", "player");
+	m_textureManager.loadTexture("res/player.png", "player");
 	Sleep(1000);
 	m_textureManager.loadTexture("background.jpg", "background");
 	Sleep(1000);
@@ -64,6 +64,7 @@ void Game::loadTexturesFromFiles()
 	Sleep(1000);
 	m_textureManager.loadTexture("background2.jpg", "background2");
 	Sleep(1000);
+
 	m_textureManager.printListName();
 }
 

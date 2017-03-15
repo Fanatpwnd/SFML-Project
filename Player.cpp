@@ -16,6 +16,8 @@ Player::Player()
 	speedx = 0;
 	speedy = 0;
 	sprite.setScale(1.5f, 1.5f);
+
+	isFalled = false;
 }
 
 Player::~Player(){
@@ -39,13 +41,14 @@ void Player::event(sf::Event *ev)
 	if (keyPressed(sf::Keyboard::Left, ev))
 	{
 		pMove = LEFT;
+		m_orientation = LEFT_SIDE;
 	}
 
 	if (keyPressed(sf::Keyboard::Right, ev))
 	{
 
-
 		pMove = RIGHT;
+		m_orientation = RIGHT_SIDE;
 	}
 	
 	if (keyRealesed(sf::Keyboard::Left, ev) ||
@@ -110,7 +113,14 @@ void Player::update(float time)
 	switch (pState)
 	{
 		case JUMP:{
-			m_animationManager->playAnimation("jump", time);
+
+			if (m_orientation == RIGHT_SIDE){
+				m_animationManager->playAnimation("rightJump", time);
+			}
+			else if (m_orientation == LEFT_SIDE){
+				m_animationManager->playAnimation("leftJump", time);
+			}
+			
 			speedy = -SPEEDJUMP * time;
 			if (clock.getElapsedTime().asSeconds() - jumpTime
 				>= TIMEJUMP)
@@ -121,7 +131,16 @@ void Player::update(float time)
 		}
 
 		case FALL:{
-			m_animationManager->playAnimation("fall", time);
+			
+			isFalled = true;
+
+			if (m_orientation == RIGHT_SIDE){
+				m_animationManager->playAnimation("rightFall", time);
+			}
+			else if (m_orientation == LEFT_SIDE){
+				m_animationManager->playAnimation("leftFall", time);
+			}
+
 			speedy = SPEEDFALL * time;
 			if (sprite.getPosition().y >= 500.0f)
 			{
@@ -132,6 +151,15 @@ void Player::update(float time)
 		}
 
 		case STAY:{
+			//bicycle number 1 starting here ^^
+			if (isFalled){
+				if (m_orientation == RIGHT_SIDE){ m_animationManager->playAnimation("rightMove", time); }
+				else if (m_orientation == LEFT_SIDE){ m_animationManager->playAnimation("leftMove", time); }
+				isFalled = false;
+			}
+			//bicycle number 1 finished here ^^
+			
+
 			speedy = 0;
 			break;
 		}
@@ -167,11 +195,19 @@ const sf::Rect<float> Player::getRect()
 void Player::initAnimation(){
 	m_animationManager->addAnimation("rightMove");
 	m_animationManager->addAnimation("leftMove");
-	m_animationManager->addAnimation("jump");
-	m_animationManager->addAnimation("fall");
+
+	m_animationManager->addAnimation("leftJump");
+	m_animationManager->addAnimation("rightJump");
+
+	m_animationManager->addAnimation("leftFall");
+	m_animationManager->addAnimation("rightFall");
 
 	m_animationManager->initFrames("rightMove", 56, 560, 56, 80, 3);
 	m_animationManager->initFrames("leftMove", 56, 560, 56, 80, 3, true);
-	m_animationManager->addFrame("jump", 56, 160, 56, 80);
-	m_animationManager->addFrame("fall", 112, 160, 56, 80);
+
+	m_animationManager->addFrame("rightJump", 56, 160, 56, 80);
+	m_animationManager->addFrame("leftJump", 112, 160, -56, 80);
+
+	m_animationManager->addFrame("rightFall", 112, 160, 56, 80);
+	m_animationManager->addFrame("leftFall", 168, 160, -56, 80);
 }

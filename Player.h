@@ -6,6 +6,7 @@
 
 enum State { FALL, JUMP, STAY };
 enum Move{ LEFT, RIGHT, NO };
+enum Orientation { LEFT_SIDE, RIGHT_SIDE };
 
 class Player
 {
@@ -20,6 +21,8 @@ private:
 	sf::Clock			clock;
 	State				pState;
 	Move				pMove;
+	Orientation			m_orientation;
+	bool				isFalled;
 
 private:
 	void move();
