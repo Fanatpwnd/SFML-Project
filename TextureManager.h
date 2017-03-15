@@ -1,12 +1,13 @@
+#pragma once
 #include <SFML/Graphics.hpp>
 #include <map>
 
 
 class TextureManager
 {
-	std::map<std::string, sf::Texture> manager;
-	int count_noname;
-	void addTexture(sf::Texture* tex, const std::string str);
+	std::map<std::string, sf::Texture>	manager;
+	int									count_noname;
+	void								addTexture(sf::Texture* tex, const std::string str);
 public:
 	TextureManager();													//Конструктор
 	sf::Texture* getTexture(const std::string str);						//Вернуть ссылку на текстуру
