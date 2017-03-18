@@ -10,7 +10,7 @@ Bullet::Bullet(sf::Texture *texture, float x, float y){
 }
 
 Bullet::~Bullet(){
-	delete m_animationManager;
+        //delete m_animationManager;
 }
 
 void Bullet::draw(sf::RenderWindow *window){
