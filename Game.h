@@ -2,6 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include "Levels.h"
 #include <vector>
+#include <list>
+#include "Bullet.h"
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
@@ -10,6 +12,8 @@
 class Game
 {
 private:
+	std::list<Bullet*> bullets;//tmp
+
 	TextureManager			m_textureManager;
 	sf::View				m_view;
     sf::Clock				m_clock;

@@ -27,4 +27,9 @@ public:
 	{
 		player.event(ev);
 	}
+
+	//tmp method
+	sf::FloatRect getPlayerRect(){
+		return player.getRect();
+	}
 };

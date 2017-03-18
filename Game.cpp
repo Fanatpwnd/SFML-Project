@@ -1,6 +1,7 @@
 #include "Game.h"
 #include <Windows.h>
-
+#include <list>
+#include "Bullet.h"
 
 void Game::update()
 {
@@ -32,13 +33,35 @@ void Game::event()
 			printf("Select 3 level \n");
 		}
 		m_levels[m_currentLevel]->event(&event);
+
+		//temporarily it will be here///////////////////////////////
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+		{
+			bullets.push_back(new Bullet(m_textureManager.getTexture("bullet"),
+				m_levels[m_currentLevel]->getPlayerRect().left,
+				m_levels[m_currentLevel]->getPlayerRect().top));
+			printf("I'm create a bullet!");
+		}
+		/////////////////////////////////////////////////////////////
 	}	
 }
 
 void Game::draw()
 {
+
+
 	m_window.clear();
 	m_levels[m_currentLevel]->draw(&m_window);
+
+	////////////////////////////tmp//////////////////////
+	std::list<Bullet*>::iterator it;
+	for (it = bullets.begin(); it != bullets.end(); it++){
+		(*it)->draw(&m_window);
+	}
+	/////////////////////////////////////////////////////
+
+
+
 	m_window.display();
 }
 
@@ -63,6 +86,8 @@ void Game::loadTexturesFromFiles()
 	m_textureManager.loadTexture("player2.jpg", "player2");
 	Sleep(1000);
 	m_textureManager.loadTexture("background2.jpg", "background2");
+	Sleep(1000);
+	m_textureManager.loadTexture("res/bullet.png", "bullet");
 	Sleep(1000);
 
 	m_textureManager.printListName();
@@ -89,6 +114,10 @@ void Game::loadLevels()
 
 void Game::loop()
 {
+	//temporarily it will be here///
+	//std::list<Bullet*>::iterator it;
+	////////////////////////////////
+
 	printf("Start game... \n");
 	while(m_window.isOpen())
 	{
@@ -96,6 +125,12 @@ void Game::loop()
 		event();
 		update();
 		draw();
+
+		//temporarily it will be here////////////////////////////
+		//for (it = bullets.begin(); it != bullets.end(); it++){
+			//(*it)->update(m_time);
+	//	}
+		////////////////////////////////////////////////////////
 	}
 }
 

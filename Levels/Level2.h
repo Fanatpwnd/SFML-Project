@@ -33,4 +33,8 @@ public:
 		printf("Creating level 2...\n");
 	}
 
+	//tmp method
+	sf::FloatRect getPlayerRect(){
+		return player.getRect();
+	}
 };

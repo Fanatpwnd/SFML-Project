@@ -10,4 +10,8 @@ public:
 	virtual void draw(sf::RenderWindow* window) = 0;
 	virtual void update(float time) = 0;
 	virtual void event(sf::Event* ev) = 0;
+
+	//it's tmp function for bullet
+	virtual sf::FloatRect getPlayerRect() = 0;
+
 };

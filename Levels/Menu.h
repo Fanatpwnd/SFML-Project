@@ -4,6 +4,7 @@
 
 class Menu: public Level
 {
+	Player player;
 	sf::Sprite button1, button2;
 	sf::Sprite background;
 public:
@@ -31,4 +32,12 @@ public:
 	{
 		printf("Creating menu...\n");
 	}
+
+	//tmp method O_o
+	//getting player's coordinates in loading...it's strange..
+	//anyway it's only tmp
+	sf::FloatRect getPlayerRect(){
+		return player.getRect();
+	}
+
 };
